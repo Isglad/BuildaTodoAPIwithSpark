@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'com.teamtreehouse'
+group = 'com.teamtreehouse.techdegrees'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -10,13 +10,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.sql2o:sql2o:1.6.0'
-    implementation 'com.h2database:h2:2.2.224'
-    implementation 'com.sparkjava:spark-core:2.9.4'
-    implementation 'com.google.code.gson:gson:2.11.0'
-    testImplementation 'junit:junit:4.13.1'
-}
-
-test {
-    useJUnitPlatform()
+    implementation 'org.sql2o:sql2o:1.5.4'
+    implementation 'com.google.code.gson:gson:2.5'
+    implementation 'com.h2database:h2:1.4.190'
+    implementation 'com.sparkjava:spark-core:2.3'
+    testImplementation('junit:junit:4.11')
 }
