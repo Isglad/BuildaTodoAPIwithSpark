@@ -1,13 +1,11 @@
-package com.teamtreehouse.techdegrees.com.teamtreehouse.techdegrees.model;
-
-import java.util.Objects;
+package com.teamtreehouse.techdegrees.model;
 
 public class Todo {
     private int id;
     private String name;
-    private Boolean isCompleted;
+    private boolean isCompleted;
 
-    public Todo(int id, String name, Boolean isCompleted) {
+    public Todo(int id, String name, boolean isCompleted) {
         this.id = id;
         this.name = name;
         this.isCompleted = isCompleted;
@@ -29,11 +27,11 @@ public class Todo {
         this.name = name;
     }
 
-    public Boolean getCompleted() {
+    public boolean isCompleted() {
         return isCompleted;
     }
 
-    public void setCompleted(Boolean completed) {
+    public void setCompleted(boolean completed) {
         isCompleted = completed;
     }
 
@@ -42,14 +40,14 @@ public class Todo {
         if (o == null || getClass() != o.getClass()) return false;
 
         Todo todo = (Todo) o;
-        return id == todo.id && name.equals(todo.name) && isCompleted.equals(todo.isCompleted);
+        return id == todo.id && isCompleted == todo.isCompleted && name.equals(todo.name);
     }
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + name.hashCode();
-        result = 31 * result + isCompleted.hashCode();
+        result = 31 * result + Boolean.hashCode(isCompleted);
         return result;
     }
 }
