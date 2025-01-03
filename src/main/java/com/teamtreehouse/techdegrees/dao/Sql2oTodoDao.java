@@ -18,15 +18,16 @@ public class Sql2oTodoDao implements TodoDao{
 
     @Override
     public void create(Todo todo) throws DaoException {
-        String sql = "INSERT INTO todos(name, isCompleted) VALUES (:name, :isCompleted)";
+        String sql = "INSERT INTO todos(name, isCompleted) VALUES(:name, :isCompleted)";
         try (Connection con = sql2o.open()) {
-            int id = (int) con.createQuery(sql, true) // `true` retrieves generated keys
-                    .bind(todo)
+            int id = (int) con.createQuery(sql)
+                    .addParameter("name", todo.getName())
+                    .addParameter("isCompleted", todo.isCompleted())
                     .executeUpdate()
                     .getKey();
-            todo.setId(id); // Set tge generated ID back into the `Todo` object
+            todo.setId(id); // Set the generated ID back into the `Todo` object
         } catch (Sql2oException ex) {
-            throw new DaoException(ex, "Problem creating todo");
+            throw new DaoException(ex, "Problem saving todo");
         }
     }
 
