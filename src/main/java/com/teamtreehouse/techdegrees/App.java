@@ -40,6 +40,16 @@ public class App {
             return todoDao.findAll(); // Fetch all Todos from DB
         }, gson::toJson);
 
+        // Route to find a Todo by Id
+        get("/api/v1/todos/:id", "application/json", (req, res) -> {
+            int id = Integer.parseInt(req.params("id"));
+            Todo todo = todoDao.findById(id);
+            if (todo == null) {
+                throw new ApiError(404, "Could not find todo with id " + id);
+            }
+            return todo;
+        }, gson::toJson);
+
         // Route to create a new todo
         post("/api/v1/todos", "application/json", (req,res) -> {
             Todo todo = gson.fromJson(req.body(), Todo.class); // Deserialize request body
@@ -54,6 +64,7 @@ public class App {
             int id = Integer.parseInt(req.params("id"));
             Todo todo = gson.fromJson(req.body(), Todo.class); // Deserialize request body
             todoDao.update(id, todo); // Update Todo in DB
+            res.status(200);
             return todo;
         }, gson::toJson);
 
