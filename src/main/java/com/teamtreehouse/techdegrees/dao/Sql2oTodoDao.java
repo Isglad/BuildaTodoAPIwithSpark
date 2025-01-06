@@ -26,6 +26,7 @@ public class Sql2oTodoDao implements TodoDao{
                     .executeUpdate()
                     .getKey();
             todo.setId(id); // Set the generated ID back into the `Todo` object
+            System.out.println("Creating todo: " + todo.getName());
         } catch (Sql2oException ex) {
             throw new DaoException(ex, "Problem saving todo");
         }
@@ -57,6 +58,7 @@ public class Sql2oTodoDao implements TodoDao{
                     .addParameter("name", todo.getName())
                     .addParameter("isCompleted", todo.isCompleted())
                     .executeUpdate();
+            System.out.println("Successfully updated!");
         } catch (Sql2oException ex) {
             throw new DaoException(ex, "Problem updating todo.");
         }
